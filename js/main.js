@@ -11,3 +11,8 @@ const getRandomNumber = (min, max) => {
 
 getRandomNumber(0, 100);
 
+
+const validateStringMaxLength = (string, maxLength = 140) => string.length <= maxLength;
+
+
+validateStringMaxLength('HTML Academy');
