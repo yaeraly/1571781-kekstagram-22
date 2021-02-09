@@ -1,3 +1,47 @@
+const names = [
+  'Алиса',
+  'Александра',
+  'Анжелика',
+  'Анна',
+  'Валентина',
+  'Валерия',
+  'Вера',
+  'Вероника',
+  'Виктория',
+  'Галина',
+  'Дарья',
+  'Диана',
+  'Евгения',
+  'Екатерина',
+  'Алёна',
+  'Елена',
+  'Елизавета',
+  'Жанна',
+  'Карина',
+  'Кристина',
+  'Ксения',
+  'Иван',
+  'Игорь',
+  'Илья',
+  'Кирилл',
+  'Константин',
+  'Лев',
+  'Леонид',
+  'Максим',
+  'Марк',
+  'Матвей',
+  'Михаил',
+  'Никита',
+  'Роман',
+  'Руслан',
+  'Сергей',
+  'Степан',
+  'Тимур',
+  'Фёдор',
+  'Юрий',
+  'Ярослав',
+]
+
 const getRandomNumber = (min, max) => {
 
   if (min < 0) {
@@ -14,7 +58,8 @@ const getRandomNumber = (min, max) => {
 getRandomNumber(1.5, 99.5);
 
 
-const validateStringMaxLength = (string, maxLength = 140) => string.length <= maxLength;
-
+const validateStringMaxLength = (string, maxLength = 140) => {
+  return string.length <= maxLength;
+}
 
 validateStringMaxLength('HTML Academy');
