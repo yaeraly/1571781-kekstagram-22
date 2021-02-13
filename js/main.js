@@ -102,9 +102,9 @@ const createComments = (numOfComments) => {
   return userComments;
 }
 
-const validateStringMaxLength = (string, maxLength = 140) => {
-  return string.length <= maxLength;
-}
+// const validateStringMaxLength = (string, maxLength = 140) => {
+//   return string.length <= maxLength;
+// }
 
 const postPhoto = (number) => {
   let numberOfComments = getRandomNumber(1, 20);
@@ -130,3 +130,5 @@ const postComment = (number) => {
 const PHOTO_COUNT = 25;
 
 let photos = new Array(PHOTO_COUNT).fill(null).map((_, index) => postPhoto(index + 1));
+
+alert(photos);  // Используется, чтобы не ругалось в консоли 'photos' is assigned a value but never used.
