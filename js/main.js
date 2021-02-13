@@ -51,6 +51,20 @@ const comments = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ]
 
+const descriptions = [
+  'Когда радости нет предела.',
+  'Грусть, я тебя не боюсь.',
+  'Любовь в каждом пикселе.',
+  'Фото, заряженное на позитив.',
+  'Улыбаюсь новому дню.',
+  'Я не плачу — это просто дождь.',
+  'Теплые воспоминания в холодное время года.',
+  'В диком восторге от происходящего.',
+  'Знали бы вы, что у меня на уме.',
+  'Где надо, там и где. Угадаете место?',
+  'Что это, если не любовь?',
+]
+
 const getRandomNumber = (min, max) => {
 
   if (min < 0) {
@@ -64,11 +78,55 @@ const getRandomNumber = (min, max) => {
   return Math.floor((Math.random() * (max - min + 1)) + min);
 }
 
-getRandomNumber(1.5, 99.5);
+const getRandomArrayElement = (arr) => {
+  return arr[getRandomNumber(0, arr.length - 1)];
+}
 
+const createComments = (numOfComments) => {
+  let userComments = [];
+  let uniqueIdNumbers = [];
+
+  for (let i = 0; i < numOfComments; i++) {
+    let isIdNumberUnique = false;
+
+    while (!isIdNumberUnique) {
+      const idNumber = getRandomNumber(1, 1000);
+
+      if (uniqueIdNumbers.indexOf(idNumber) === -1) {
+        uniqueIdNumbers.push(idNumber);
+        userComments.push(postComment(idNumber));
+        isIdNumberUnique = true;
+      }
+    }
+  }
+  return userComments;
+}
 
 const validateStringMaxLength = (string, maxLength = 140) => {
   return string.length <= maxLength;
 }
 
-validateStringMaxLength('HTML Academy');
+const postPhoto = (number) => {
+  let numberOfComments = getRandomNumber(1, 20);
+
+  return {
+    id: number,
+    url: `photos/${number}.jpg`,
+    description: getRandomArrayElement(descriptions),
+    likes: getRandomNumber(15, 200),
+    comments: createComments(numberOfComments),
+  }
+}
+
+const postComment = (number) => {
+  return {
+    id: number,
+    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+    message: getRandomArrayElement(comments),
+    name: getRandomArrayElement(names),
+  }
+}
+
+const PHOTO_COUNT = 25;
+
+let photos = new Array(PHOTO_COUNT).fill(null).map((_, index) => postPhoto(index + 1));
