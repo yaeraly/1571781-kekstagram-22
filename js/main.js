@@ -1,4 +1,7 @@
-const names = [
+const PHOTO_COUNT = 25;
+const COMMENT_COUNT = 50;
+
+const NAMES = [
   'Алиса',
   'Александра',
   'Анжелика',
@@ -42,7 +45,7 @@ const names = [
   'Ярослав',
 ]
 
-const comments = [
+const COMMENTS = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -51,7 +54,7 @@ const comments = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ]
 
-const descriptions = [
+const DESCRIPTIONS = [
   'Когда радости нет предела.',
   'Грусть, я тебя не боюсь.',
   'Любовь в каждом пикселе.',
@@ -64,6 +67,26 @@ const descriptions = [
   'Где надо, там и где. Угадаете место?',
   'Что это, если не любовь?',
 ]
+
+let uniqueIdNumbers = [];
+
+const getUniqueId = () => {
+  let isUnique = false;
+
+  while (!isUnique) {
+    let randomNumber = getRandomNumber(0, 1000);
+
+    if (uniqueIdNumbers.indexOf(randomNumber) === -1) {
+      uniqueIdNumbers.push(randomNumber);
+      return randomNumber;
+    }
+  }
+}
+
+const getArrayRange = (arr) => {
+  let startIndex = arr.indexOf(arr[getRandomNumber(0, arr.length-1)]);
+  return arr.slice(startIndex);
+}
 
 const getRandomNumber = (min, max) => {
 
@@ -78,28 +101,14 @@ const getRandomNumber = (min, max) => {
   return Math.floor((Math.random() * (max - min + 1)) + min);
 }
 
-const getRandomArrayElement = (arr) => {
-  return arr[getRandomNumber(0, arr.length - 1)];
-}
+const getRandomArrayElement = (arr, neededElements = 1) => {
+  const lastArrIndex = arr.length - 1;
 
-const createComments = (numOfComments) => {
-  let userComments = [];
-  let uniqueIdNumbers = [];
-
-  for (let i = 0; i < numOfComments; i++) {
-    let isIdNumberUnique = false;
-
-    while (!isIdNumberUnique) {
-      const idNumber = getRandomNumber(1, 1000);
-
-      if (uniqueIdNumbers.indexOf(idNumber) === -1) {
-        uniqueIdNumbers.push(idNumber);
-        userComments.push(postComment(idNumber));
-        isIdNumberUnique = true;
-      }
-    }
+  if (neededElements > 1) {
+    return new Array(neededElements).fill(null).map(() => arr[getRandomNumber(0, lastArrIndex)]).join(' ');
   }
-  return userComments;
+
+  return arr[getRandomNumber(0, lastArrIndex)];
 }
 
 // const validateStringMaxLength = (string, maxLength = 140) => {
@@ -107,28 +116,29 @@ const createComments = (numOfComments) => {
 // }
 
 const postPhoto = (number) => {
-  let numberOfComments = getRandomNumber(1, 20);
-
   return {
     id: number,
     url: `photos/${number}.jpg`,
-    description: getRandomArrayElement(descriptions),
+    description: getRandomArrayElement(DESCRIPTIONS),
     likes: getRandomNumber(15, 200),
-    comments: createComments(numberOfComments),
+    comments: getArrayRange(userComments),
   }
 }
 
-const postComment = (number) => {
+const postComment = () => {
+  let neededComments = getRandomNumber(1, 2);
+
   return {
-    id: number,
+    id: getUniqueId(),
     avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
-    message: getRandomArrayElement(comments),
-    name: getRandomArrayElement(names),
+    message: getRandomArrayElement(COMMENTS, neededComments),
+    name: getRandomArrayElement(NAMES),
   }
 }
 
-const PHOTO_COUNT = 25;
+let userComments = new Array(COMMENT_COUNT).fill(null).map(() => postComment());
 
 let photos = new Array(PHOTO_COUNT).fill(null).map((_, index) => postPhoto(index + 1));
 
-alert(photos);  // Используется, чтобы не ругалось в консоли 'photos' is assigned a value but never used.
+alert(photos);
+
