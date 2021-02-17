@@ -68,7 +68,7 @@ const DESCRIPTIONS = [
   'Что это, если не любовь?',
 ]
 
-const UNIQUE_ID_NUMBERS = [];
+const uniqueIdNumbers = [];
 
 const getUniqueId = () => {
   let isUnique = false;
@@ -76,8 +76,8 @@ const getUniqueId = () => {
   while (!isUnique) {
     let randomNumber = getRandomNumber(0, 1000);
 
-    if (UNIQUE_ID_NUMBERS.indexOf(randomNumber) === -1) {
-      UNIQUE_ID_NUMBERS.push(randomNumber);
+    if (uniqueIdNumbers.indexOf(randomNumber) === -1) {
+      uniqueIdNumbers.push(randomNumber);
       return randomNumber;
     }
   }
@@ -125,12 +125,12 @@ const postPhoto = (number) => {
 }
 
 const postComment = () => {
-  const NEEDED_COMMENTS = getRandomNumber(1, 2);
+  const neededComments = getRandomNumber(1, 2);
 
   return {
     id: getUniqueId(),
     avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
-    message: getRandomArrayElement(COMMENTS, NEEDED_COMMENTS),
+    message: getRandomArrayElement(COMMENTS, neededComments),
     name: getRandomArrayElement(NAMES),
   }
 }
@@ -140,4 +140,3 @@ let userComments = new Array(COMMENT_COUNT).fill(null).map(() => postComment());
 let photos = new Array(PHOTO_COUNT).fill(null).map((_, index) => postPhoto(index + 1));
 
 alert(photos);
-
