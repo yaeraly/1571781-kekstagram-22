@@ -9,9 +9,9 @@ const fragment          = document.createDocumentFragment();
 photos.forEach(({ url, comments, likes }) => {
   const element = pictureTemplate.cloneNode(true);
 
-  element.children[0].src = url;
-  element.children[1].children[0].textContent = comments.length;
-  element.children[1].children[1].textContent = likes;
+  element.querySelector('.picture__img').src = url;
+  element.querySelector('.picture__comments').textContent = comments.length;
+  element.querySelector('.picture__likes').textContent = likes;
 
   fragment.appendChild(element);
 });
