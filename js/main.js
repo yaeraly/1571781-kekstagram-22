@@ -1,3 +1,1 @@
-import { photos } from './data.js';
-
-alert(photos);
+import './picture.js';
