@@ -1,3 +1,4 @@
-import { photos } from './data.js';
+import { photos } from './data.js'
+import { renderPictures } from './picture-list.js';
 
-alert(photos);
+renderPictures(photos);
