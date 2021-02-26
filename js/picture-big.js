@@ -1,3 +1,5 @@
+import { isEscEvent } from './util.js'
+
 const page              = document.body;
 const fullPhoto         = document.querySelector('.big-picture');
 const closePhotoButton  = fullPhoto.querySelector('.big-picture__cancel');
@@ -41,9 +43,7 @@ closePhotoButton.addEventListener('click', () => {
 
 // Close Big Photo using Esc Key
 document.addEventListener('keydown', (evt) => {
-  const key = evt.keyCode;
-
-  if(key === 27 || key === 'Escape' || key === 'Esc') {
+  if(isEscEvent(evt)) {
     toggleElement(page, pageClassName);
     toggleElement(fullPhoto, elementClassName);
   }
