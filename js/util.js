@@ -1,4 +1,4 @@
-import { COMMENT_COUNT } from './source-data.js';
+import { COMMENT_COUNT, PAGE, PAGE_CLASS_NAME } from './source-data.js';
 
 const makeUniqueRandomIntegerGenerator = (min, max) => {
   const uniqueNumbers = [];
@@ -56,4 +56,21 @@ const isEscEvent = (evt) => {
   return evt.key === ('Escape' || 'Esc');
 };
 
-export { getUniqueRandomInteger, getArrayRange, getRandomNumber, getRandomArrayElement, validateStringMaxLength, isEscEvent }
+const toggleElement = (elementName, className = 'hidden') => {
+  elementName.classList.toggle(className);
+}
+
+const togglePage = () => {
+  PAGE.classList.toggle(PAGE_CLASS_NAME);
+}
+
+export {
+  getUniqueRandomInteger,
+  getArrayRange,
+  getRandomNumber,
+  getRandomArrayElement,
+  validateStringMaxLength,
+  isEscEvent,
+  toggleElement,
+  togglePage
+}

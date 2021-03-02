@@ -1,6 +1,6 @@
 import { photos } from './data.js'
 import { renderPictures } from './picture-list.js';
-import { showFullPhoto } from './picture-big.js';
+import { showFullPhoto } from './big-picture.js';
 
 renderPictures(photos);
 
