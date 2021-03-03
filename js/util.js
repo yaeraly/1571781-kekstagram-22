@@ -52,4 +52,15 @@ const validateStringMaxLength = (string, maxLength = 140) => {
   return string.length <= maxLength;
 }
 
-export { getUniqueRandomInteger, getArrayRange, getRandomNumber, getRandomArrayElement, validateStringMaxLength }
+const isEscEvent = (evt) => {
+  return evt.key === ('Escape' || 'Esc');
+};
+
+export {
+  getUniqueRandomInteger,
+  getArrayRange,
+  getRandomNumber,
+  getRandomArrayElement,
+  validateStringMaxLength,
+  isEscEvent
+}

@@ -1,3 +1,5 @@
+const PAGE = document.body;
+const PAGE_CLASS_NAME = 'modal-open';
 const PHOTO_COUNT = 25;
 const COMMENT_COUNT = 50;
 
@@ -68,4 +70,12 @@ const DESCRIPTIONS = [
   'Что это, если не любовь?',
 ]
 
-export { PHOTO_COUNT, COMMENT_COUNT, NAMES, COMMENTS, DESCRIPTIONS }
+export {
+  PAGE,
+  PAGE_CLASS_NAME,
+  PHOTO_COUNT,
+  COMMENT_COUNT,
+  NAMES,
+  COMMENTS,
+  DESCRIPTIONS
+}
