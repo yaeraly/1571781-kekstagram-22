@@ -1,17 +1,19 @@
-import { togglePage, toggleElement, isEscEvent } from './util.js';
+import { isEscEvent } from './util.js';
+import { PAGE, PAGE_CLASS_NAME } from './source-data.js';
+
 
 const onPopupClick = (button, modal) => {
   button.addEventListener('click', () => {
-    togglePage();
-    toggleElement(modal);
+    PAGE.classList.toggle(PAGE_CLASS_NAME);
+    modal.classList.toggle('hidden');
   });
 }
 
 const onPopupEscKeydown = (modal) => {
   document.addEventListener('keydown', (evt) => {
     if(isEscEvent(evt) && !modal.classList.contains('hidden')) {
-      togglePage();
-      toggleElement(modal);
+      PAGE.classList.toggle(PAGE_CLASS_NAME);
+      modal.classList.toggle('hidden');
     }
   });
 }
