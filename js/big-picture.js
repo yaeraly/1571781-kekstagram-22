@@ -30,7 +30,7 @@ const showFullPhoto = ( pictureElement, { url, description, likes, comments } ) 
 
     const commentsLength = comments.length;
 
-    const maxComments = commentsLength < 5 ? commentsLength : 5;
+    const maxComments = Math.min(commentsLength, 5)
 
     fullPhoto.querySelector('img').src = url;
     fullPhoto.querySelector('img').alt = description;
