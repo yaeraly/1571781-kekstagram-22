@@ -1,11 +1,15 @@
 import { PAGE, PAGE_CLASS_NAME } from './source-data.js';
-import { onPopupClick, onPopupEscKeydown } from './popup-handler.js';
+import { onPopupEvent, onPopupEscKeydown } from './popup-handler.js';
 
 const fullPhoto         = document.querySelector('.big-picture');
 const closePhotoButton  = fullPhoto.querySelector('.big-picture__cancel');
 const commentsContainer = document.querySelector('.social__comments');
 const socialComment     = commentsContainer.querySelector('.social__comment');
 const fragment          = document.createDocumentFragment();
+
+const pictureEditForm   = document.querySelector('.img-upload__overlay');
+const closeFormButton   = pictureEditForm.querySelector('.img-upload__cancel');
+const inputUpload       = document.querySelector('.img-upload__input');
 
 
 const renderComments = (arr) => {
@@ -47,8 +51,12 @@ const showFullPhoto = ( pictureElement, { url, description, likes, comments } ) 
   });
 }
 
-onPopupClick(closePhotoButton, fullPhoto);
+onPopupEvent('click', closePhotoButton, fullPhoto);
 onPopupEscKeydown(fullPhoto);
+
+onPopupEvent('change', inputUpload, pictureEditForm);
+onPopupEvent('click', closeFormButton, pictureEditForm);
+onPopupEscKeydown(pictureEditForm);
 
 
 export { showFullPhoto }

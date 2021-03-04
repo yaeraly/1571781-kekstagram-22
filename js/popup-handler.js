@@ -2,8 +2,8 @@ import { isEscEvent } from './util.js';
 import { PAGE, PAGE_CLASS_NAME } from './source-data.js';
 
 
-const onPopupClick = (button, modal) => {
-  button.addEventListener('click', () => {
+const onPopupEvent = (eventType, button, modal) => {
+  button.addEventListener(eventType, () => {
     PAGE.classList.toggle(PAGE_CLASS_NAME);
     modal.classList.toggle('hidden');
   });
@@ -18,4 +18,4 @@ const onPopupEscKeydown = (modal) => {
   });
 }
 
-export { onPopupClick, onPopupEscKeydown }
+export { onPopupEvent, onPopupEscKeydown }
