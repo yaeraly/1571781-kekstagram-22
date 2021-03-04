@@ -1,5 +1,7 @@
+import { isEscEvent } from './util.js';
 import { PAGE, PAGE_CLASS_NAME } from './source-data.js';
 import { onPopupEvent, onPopupEscKeydown } from './popup-handler.js';
+
 
 const fullPhoto         = document.querySelector('.big-picture');
 const closePhotoButton  = fullPhoto.querySelector('.big-picture__cancel');
@@ -54,9 +56,28 @@ const showFullPhoto = ( pictureElement, { url, description, likes, comments } ) 
 onPopupEvent('click', closePhotoButton, fullPhoto);
 onPopupEscKeydown(fullPhoto);
 
-onPopupEvent('change', inputUpload, pictureEditForm);
-onPopupEvent('click', closeFormButton, pictureEditForm);
-onPopupEscKeydown(pictureEditForm);
+const uploadPicture = () => {
+  inputUpload.addEventListener('change', () => {
+    PAGE.classList.toggle('modal-open');
+    pictureEditForm.classList.toggle('hidden');
+  });
+}
+
+const closeEditForm = () => {
+  closeFormButton.addEventListener('click', () => {
+    PAGE.classList.toggle('modal-open');
+    pictureEditForm.classList.toggle('hidden');
+    inputUpload.value = null;
+  });
+
+  document.addEventListener('keydown', (evt) => {
+    if(isEscEvent(evt) && !pictureEditForm.classList.contains('hidden')) {
+      PAGE.classList.toggle(PAGE_CLASS_NAME);
+      pictureEditForm.classList.toggle('hidden');
+      inputUpload.value = null;
+    }
+  });
+}
 
 
-export { showFullPhoto }
+export { showFullPhoto, uploadPicture, closeEditForm }
