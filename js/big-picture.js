@@ -1,17 +1,11 @@
-import { isEscEvent } from './util.js';
 import { PAGE, PAGE_CLASS_NAME } from './source-data.js';
-import { onPopupEvent, onPopupEscKeydown } from './popup-handler.js';
-
+import { onPopupClick, onPopupEscKeydown } from './popup-handler.js';
 
 const fullPhoto         = document.querySelector('.big-picture');
 const closePhotoButton  = fullPhoto.querySelector('.big-picture__cancel');
 const commentsContainer = document.querySelector('.social__comments');
 const socialComment     = commentsContainer.querySelector('.social__comment');
 const fragment          = document.createDocumentFragment();
-
-const pictureEditForm   = document.querySelector('.img-upload__overlay');
-const closeFormButton   = pictureEditForm.querySelector('.img-upload__cancel');
-const inputUpload       = document.querySelector('.img-upload__input');
 
 
 const renderComments = (arr) => {
@@ -53,31 +47,8 @@ const showFullPhoto = ( pictureElement, { url, description, likes, comments } ) 
   });
 }
 
-onPopupEvent('click', closePhotoButton, fullPhoto);
+onPopupClick(closePhotoButton, fullPhoto);
 onPopupEscKeydown(fullPhoto);
 
-const uploadPicture = () => {
-  inputUpload.addEventListener('change', () => {
-    PAGE.classList.toggle('modal-open');
-    pictureEditForm.classList.toggle('hidden');
-  });
-}
 
-const closeEditForm = () => {
-  closeFormButton.addEventListener('click', () => {
-    PAGE.classList.toggle('modal-open');
-    pictureEditForm.classList.toggle('hidden');
-    inputUpload.value = null;
-  });
-
-  document.addEventListener('keydown', (evt) => {
-    if(isEscEvent(evt) && !pictureEditForm.classList.contains('hidden')) {
-      PAGE.classList.toggle(PAGE_CLASS_NAME);
-      pictureEditForm.classList.toggle('hidden');
-      inputUpload.value = null;
-    }
-  });
-}
-
-
-export { showFullPhoto, uploadPicture, closeEditForm }
+export { showFullPhoto }
