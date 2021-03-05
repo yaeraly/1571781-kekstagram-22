@@ -11,8 +11,8 @@ const uploadPicture = () => {
     PAGE.classList.toggle('modal-open');
     pictureEditForm.classList.toggle('hidden');
 
-    pictureEditForm.querySelector('.scale__control--value').value = '100%'; // Значение по умолчанию — 100%
     pictureEditForm.querySelector('img').style = 'transform: scale(1)';
+    pictureEditForm.querySelector('.scale__control--value').value = '100%'; // Значение по умолчанию — 100%
   });
 }
 
