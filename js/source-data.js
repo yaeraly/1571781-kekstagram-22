@@ -70,6 +70,57 @@ const DESCRIPTIONS = [
   'Что это, если не любовь?',
 ]
 
+const PICTURE_EFFECTS = [
+  {
+    name: 'origin',
+    min: null,
+    max: null,
+    step: null,
+    start: null,
+    suffix: null,
+  },
+  {
+    name: 'grayscale',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    start: 1,
+    suffix: null,
+  },
+  {
+    name: 'sepia',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    start: 1,
+    suffix: null,
+  },
+  {
+    name: 'invert',
+    min: 0,
+    max: 100,
+    step: 1,
+    start: 100,
+    suffix: '%',
+  },
+  {
+    name: 'blur',
+    min: 0,
+    max: 3,
+    step: 0.1,
+    start: 3,
+    suffix: 'px',
+  },
+  {
+    name: 'brightness',
+    min: 0,
+    max: 3,
+    step: 0.1,
+    start: 3,
+    suffix: null,
+  },
+]
+
 export {
   PAGE,
   PAGE_CLASS_NAME,
@@ -77,5 +128,6 @@ export {
   COMMENT_COUNT,
   NAMES,
   COMMENTS,
-  DESCRIPTIONS
+  DESCRIPTIONS,
+  PICTURE_EFFECTS
 }

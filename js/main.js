@@ -3,6 +3,7 @@ import { showFullPhoto } from './big-picture.js';
 import { scalePicture } from './picture-scale.js';
 import { renderPictures } from './picture-list.js';
 import { uploadPicture, closeEditForm } from './picture-upload.js';
+import './picture-effect.js';
 
 
 
