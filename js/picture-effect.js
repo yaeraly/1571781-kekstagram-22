@@ -1,5 +1,4 @@
 import { PICTURE_EFFECTS } from './source-data.js';
-import { noUiSlider } from '../nouislider/nouislider.js';
 
 const imgPicturePreview   = document.querySelector('.img-upload__preview');
 
