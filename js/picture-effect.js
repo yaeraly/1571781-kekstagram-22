@@ -8,6 +8,7 @@ const imgPreviewClassName = imgPicturePreview.className;
 
 const slider = document.querySelector('.effect-level__slider');
 
+/* global noUiSlider:readonly */
 noUiSlider.create(slider, {
   range: {
     'min': 0,
