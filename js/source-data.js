@@ -2,6 +2,9 @@ const PAGE = document.body;
 const PAGE_CLASS_NAME = 'modal-open';
 const PHOTO_COUNT = 25;
 const COMMENT_COUNT = 50;
+const ZOOM_MIN = 25;
+const ZOOM_MAX = 100;
+const ZOOM_STEP  = 25;
 
 const NAMES = [
   'Алиса',
@@ -70,62 +73,65 @@ const DESCRIPTIONS = [
   'Что это, если не любовь?',
 ]
 
-const PICTURE_EFFECTS = [
-  {
-    name: 'origin',
+const PICTURE_EFFECTS = {
+  none: {
+    effect: null,
     min: null,
     max: null,
     step: null,
     start: null,
-    suffix: null,
+    unit: null,
   },
-  {
-    name: 'grayscale',
+  chrome: {
+    effect: 'grayscale',
     min: 0,
     max: 1,
     step: 0.1,
     start: 1,
-    suffix: null,
+    unit: null,
   },
-  {
-    name: 'sepia',
+  sepia: {
+    effect: 'sepia',
     min: 0,
     max: 1,
     step: 0.1,
     start: 1,
-    suffix: null,
+    unit: null,
   },
-  {
-    name: 'invert',
+  marvin: {
+    effect: 'invert',
     min: 0,
     max: 100,
     step: 1,
     start: 100,
-    suffix: '%',
+    unit: '%',
   },
-  {
-    name: 'blur',
+  phobos: {
+    effect: 'blur',
     min: 0,
     max: 3,
     step: 0.1,
     start: 3,
-    suffix: 'px',
+    unit: 'px',
   },
-  {
-    name: 'brightness',
+  heat: {
+    effect: 'brightness',
     min: 0,
     max: 3,
     step: 0.1,
     start: 3,
-    suffix: null,
+    unit: null,
   },
-]
+}
 
 export {
   PAGE,
   PAGE_CLASS_NAME,
   PHOTO_COUNT,
   COMMENT_COUNT,
+  ZOOM_MIN,
+  ZOOM_MAX,
+  ZOOM_STEP,
   NAMES,
   COMMENTS,
   DESCRIPTIONS,

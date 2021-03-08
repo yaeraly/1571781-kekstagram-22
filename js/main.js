@@ -13,6 +13,7 @@ closeEditForm();
 scalePicture();
 
 const pictures  = document.querySelectorAll('.picture');
-for (let i = 0; i < photos.length; i++) {
-  showFullPhoto(pictures[i], photos[i]);
-}
+
+photos.forEach((photo, index) => {
+  showFullPhoto(pictures[index], photo);
+});

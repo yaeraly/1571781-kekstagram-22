@@ -1,3 +1,5 @@
+import { ZOOM_MIN, ZOOM_MAX, ZOOM_STEP } from './source-data.js';
+
 const imgUploadPreview  = document.querySelector('.img-upload__preview');
 
 const scaleContainer            = document.querySelector('.img-upload__scale');
@@ -11,17 +13,18 @@ const scalePicture = () => {
 
   incrementScaleValueButton.addEventListener('click', () => {
     scaleValue = parseInt(scaleControlValue.value);
-    if (scaleValue < 100) {
-      scaleValue += 25;
+    if (scaleValue < ZOOM_MAX) {
+      scaleValue += ZOOM_STEP;
       scaleControlValue.value = `${scaleValue}%`;
       imgUploadPreview.querySelector('img').style = `transform: scale(${scaleValue / 100})`;
+      console.log('event');
     }
   });
 
   decrementScaleValueButton.addEventListener('click', () => {
     scaleValue = parseInt(scaleControlValue.value);
-    if (scaleValue > 25) {
-      scaleValue -= 25;
+    if (scaleValue > ZOOM_MIN) {
+      scaleValue -= ZOOM_STEP;
       scaleControlValue.value = `${scaleValue}%`;
       imgUploadPreview.querySelector('img').style = `transform: scale(${scaleValue / 100})`;
     }

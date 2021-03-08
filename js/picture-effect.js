@@ -23,9 +23,12 @@ slider.noUiSlider.on('update', (values, handler) => {
 });
 
 
-const addRadioboxHandler = (radiobox, {name, min, max, step, start, suffix}) => {
+const addRadioboxHandler = (radiobox) => {
+  const {effect, min, max, step, start, unit} = PICTURE_EFFECTS[radiobox.value];
+
+
   radiobox.addEventListener('change', (evt) => {
-    if (name === 'origin') {
+    if (!effect) {
       imgPicturePreview.style = '';
     }
 
@@ -40,13 +43,13 @@ const addRadioboxHandler = (radiobox, {name, min, max, step, start, suffix}) => 
         start: start,
         step: step,
         format: {
-          to: function (value) {
-            if (suffix){
-              return `filter: ${name}(${value}${suffix})`;
+          to: (value) => {
+            if (unit){
+              return `filter: ${effect}(${value}${unit})`;
             }
-            return `filter: ${name}(${value})`;
+            return `filter: ${effect}(${value})`;
           },
-          from: function(value) {
+          from: (value) => {
             return value;
           },
         },
@@ -64,6 +67,6 @@ const addRadioboxHandler = (radiobox, {name, min, max, step, start, suffix}) => 
   });
 }
 
-for (let i = 0; i < effects.length; i++) {
-  addRadioboxHandler(effects[i], PICTURE_EFFECTS[i]);
-}
+effects.forEach((effect) => {
+  addRadioboxHandler(effect);
+});
