@@ -1,5 +1,5 @@
 import { PAGE, PAGE_CLASS_NAME } from './source-data.js';
-import { onPopupClick, onPopupEscKeydown } from './popup-handler.js';
+import { onPopupEvent, onPopupEscKeydown } from './popup-handler.js';
 
 const fullPhoto         = document.querySelector('.big-picture');
 const closePhotoButton  = fullPhoto.querySelector('.big-picture__cancel');
@@ -47,7 +47,7 @@ const showFullPhoto = ( pictureElement, { url, description, likes, comments } ) 
   });
 }
 
-onPopupClick(closePhotoButton, fullPhoto);
+onPopupEvent('click', closePhotoButton, fullPhoto);
 onPopupEscKeydown(fullPhoto);
 
 

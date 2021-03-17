@@ -1,34 +1,27 @@
 import { ZOOM_MIN, ZOOM_MAX, ZOOM_STEP } from './source-data.js';
 
-const imgUploadPreview  = document.querySelector('.img-upload__preview');
-
-const scaleContainer            = document.querySelector('.img-upload__scale');
-const scaleControlValue         = scaleContainer.querySelector('.scale__control--value');
-const incrementScaleValueButton = scaleContainer.querySelector('.scale__control--bigger');
-const decrementScaleValueButton = scaleContainer.querySelector('.scale__control--smaller');
+const previewPicture  = document.querySelector('.img-upload__preview').querySelector('img');
+const scaleValueInput = document.querySelector('.scale__control--value');
 
 
-const scalePicture = () => {
-  let scaleValue;
+const incrementScaleValue = () => {
+  let incrementValue = parseInt(scaleValueInput.value);
 
-  incrementScaleValueButton.addEventListener('click', () => {
-    scaleValue = parseInt(scaleControlValue.value);
-    if (scaleValue < ZOOM_MAX) {
-      scaleValue += ZOOM_STEP;
-      scaleControlValue.value = `${scaleValue}%`;
-      imgUploadPreview.querySelector('img').style = `transform: scale(${scaleValue / 100})`;
-      console.log('event');
-    }
-  });
-
-  decrementScaleValueButton.addEventListener('click', () => {
-    scaleValue = parseInt(scaleControlValue.value);
-    if (scaleValue > ZOOM_MIN) {
-      scaleValue -= ZOOM_STEP;
-      scaleControlValue.value = `${scaleValue}%`;
-      imgUploadPreview.querySelector('img').style = `transform: scale(${scaleValue / 100})`;
-    }
-  });
+  if (incrementValue < ZOOM_MAX) {
+    incrementValue += ZOOM_STEP;
+    scaleValueInput.value = `${incrementValue}%`;
+    previewPicture.style = `transform: scale(${incrementValue / 100})`;
+  }
 }
 
-export { scalePicture }
+const decrementScaleValue = () => {
+  let decrementValue = parseInt(scaleValueInput.value);
+
+  if (decrementValue > ZOOM_MIN) {
+    decrementValue -= ZOOM_STEP;
+    scaleValueInput.value = `${decrementValue}%`;
+    previewPicture.style = `transform: scale(${decrementValue / 100})`;
+  }
+}
+
+export { incrementScaleValue, decrementScaleValue }

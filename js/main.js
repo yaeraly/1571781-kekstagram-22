@@ -1,19 +1,17 @@
-import { photos } from './data.js'
-import { showFullPhoto } from './big-picture.js';
-import { scalePicture } from './picture-scale.js';
-import { renderPictures } from './picture-list.js';
-import { uploadPicture, closeEditForm } from './picture-upload.js';
+// import { photos } from './data.js'
+// import { showFullPhoto } from './big-picture.js';
+// import { renderPictures } from './picture-list.js';
+import { uploadPicture } from './picture-upload.js';
 import './picture-effect.js';
 
 
 
-renderPictures(photos);
+
+// renderPictures(photos);
 uploadPicture();
-closeEditForm();
-scalePicture();
 
-const pictures  = document.querySelectorAll('.picture');
+// const pictures  = document.querySelectorAll('.picture');
 
-photos.forEach((photo, index) => {
-  showFullPhoto(pictures[index], photo);
-});
+// photos.forEach((photo, index) => {
+//   showFullPhoto(pictures[index], photo);
+// });
