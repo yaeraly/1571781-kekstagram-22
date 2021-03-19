@@ -1,5 +1,5 @@
 import { PAGE, PAGE_CLASS_NAME } from './source-data.js';
-import { onPopupClick, onPopupEscKeydown } from './popup-handler.js';
+import { isEscEvent } from './util.js';
 
 const fullPhoto         = document.querySelector('.big-picture');
 const closePhotoButton  = fullPhoto.querySelector('.big-picture__cancel');
@@ -44,11 +44,35 @@ const showFullPhoto = ( pictureElement, { url, description, likes, comments } ) 
 
     // fullPhoto.querySelector('.social__comment-count').classList.add('hidden');
     fullPhoto.querySelector('.social__comments-loader').classList.add('hidden');
+
+    addEventListeners();
   });
 }
 
-onPopupClick(closePhotoButton, fullPhoto);
-onPopupEscKeydown(fullPhoto);
+const closeFullPhoto = () => {
+  PAGE.classList.toggle(PAGE_CLASS_NAME);
+  fullPhoto.classList.toggle('hidden');
 
+  deleteEventListeners();
+}
+
+const closeFullPhotoEsc = (evt) => {
+  if(isEscEvent(evt) && !fullPhoto.classList.contains('hidden')) {
+    PAGE.classList.toggle(PAGE_CLASS_NAME);
+    fullPhoto.classList.toggle('hidden');
+
+    deleteEventListeners();
+  }
+}
+
+const addEventListeners = () => {
+  closePhotoButton.addEventListener('click', closeFullPhoto);
+  document.addEventListener('keydown', closeFullPhotoEsc);
+}
+
+const deleteEventListeners = () => {
+  closePhotoButton.removeEventListener('click', closeFullPhoto);
+  document.removeEventListener('keydown', closeFullPhotoEsc);
+}
 
 export { showFullPhoto }
