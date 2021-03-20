@@ -1,7 +1,6 @@
 import { PICTURE_EFFECTS } from './source-data.js';
 
 const imgPicturePreview   = document.querySelector('.img-upload__preview');
-
 const effectList          = document.querySelector('.effects__list');
 const effects             = effectList.querySelectorAll('.effects__radio');
 const imgPreviewClassName = imgPicturePreview.className;
