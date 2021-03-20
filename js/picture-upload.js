@@ -10,6 +10,9 @@ const previewPicture      = pictureEditForm.querySelector('img');
 const closeEditFormButton = pictureEditForm.querySelector('.img-upload__cancel');
 const hashtag             = pictureEditForm.querySelector('.text__hashtags');
 const comment             = pictureEditForm.querySelector('.text__description');
+const effectRadio         = pictureEditForm.querySelectorAll('.effects__radio');
+const imgPicturePreview   = document.querySelector('.img-upload__preview');
+
 
 const scaleControlValue         = pictureEditForm.querySelector('.scale__control--value');
 const incrementScaleValueButton = pictureEditForm.querySelector('.scale__control--bigger');
@@ -20,6 +23,10 @@ const resetUploadForm = () => {
   hashtag.value = null;
   comment.value = null;
   inputUpload.value = null;
+  effectRadio[0].checked = true;
+  imgPicturePreview.style = null;
+  imgPicturePreview.className = null;
+
   scaleControlValue.value = '100%';
   previewPicture.style = 'transform: scale(1)';
 }
@@ -27,7 +34,8 @@ const resetUploadForm = () => {
 const uploadPicture = () => {
   inputUpload.addEventListener('change', () => {
     toggleModal(pictureEditForm);
-    resetUploadForm();
+    scaleControlValue.value = '100%';
+    previewPicture.style = 'transform: scale(1)';
     addEventListeners();
   });
 }

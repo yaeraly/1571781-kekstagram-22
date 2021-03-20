@@ -1,6 +1,7 @@
 import { PICTURE_EFFECTS } from './source-data.js';
 
 const imgPicturePreview   = document.querySelector('.img-upload__preview');
+
 const effectList          = document.querySelector('.effects__list');
 const effects             = effectList.querySelectorAll('.effects__radio');
 const imgPreviewClassName = imgPicturePreview.className;
@@ -52,15 +53,6 @@ const addRadioboxHandler = (radiobox) => {
             return value;
           },
         },
-      });
-    } else {
-      slider.noUiSlider.updateOptions({
-        range: {
-          'min': 0,
-          'max': 1,
-        },
-        start: 0,
-        step: 0.1,
       });
     }
   });
