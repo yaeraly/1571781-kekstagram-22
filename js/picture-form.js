@@ -32,7 +32,7 @@ const setUserFormSubmit = (evt) => {
       toggleModal(pictureEditForm);
       resetUploadForm();
 
-      successPopup.cloneNode(true);
+      const node = successPopup.cloneNode(true);
       main.appendChild(successPopup);
 
       addEventListeners('success');
