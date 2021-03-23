@@ -1,4 +1,4 @@
-import { COMMENT_COUNT } from './source-data.js';
+import { COMMENT_COUNT, PAGE, PAGE_CLASS_NAME } from './source-data.js';
 
 const makeUniqueRandomIntegerGenerator = (min, max) => {
   const uniqueNumbers = [];
@@ -56,11 +56,39 @@ const isEscEvent = (evt) => {
   return evt.key === ('Escape' || 'Esc');
 };
 
+const showAlert = (alertMessage) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = 100;
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = 0;
+  alertContainer.style.top = 0;
+  alertContainer.style.right = 0;
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'red';
+
+  alertContainer.textContent = alertMessage;
+
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, 5000);
+}
+
+const toggleModal = (popup, tagName='hidden') => {
+  PAGE.classList.toggle(PAGE_CLASS_NAME);
+  popup.classList.toggle(tagName);
+}
+
 export {
   getUniqueRandomInteger,
   getArrayRange,
   getRandomNumber,
   getRandomArrayElement,
   validateStringMaxLength,
-  isEscEvent
+  isEscEvent,
+  showAlert,
+  toggleModal
 }

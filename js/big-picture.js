@@ -1,5 +1,4 @@
-import { PAGE, PAGE_CLASS_NAME } from './source-data.js';
-import { isEscEvent } from './util.js';
+import { isEscEvent, toggleModal } from './util.js';
 
 const fullPhoto         = document.querySelector('.big-picture');
 const closePhotoButton  = fullPhoto.querySelector('.big-picture__cancel');
@@ -27,8 +26,7 @@ const showFullPhoto = ( pictureElement, { url, description, likes, comments } ) 
   pictureElement.addEventListener('click', (evt) => {
     evt.preventDefault();
 
-    PAGE.classList.toggle(PAGE_CLASS_NAME);
-    fullPhoto.classList.toggle('hidden');
+    toggleModal(fullPhoto);
 
     const commentsLength = comments.length;
 
@@ -50,17 +48,13 @@ const showFullPhoto = ( pictureElement, { url, description, likes, comments } ) 
 }
 
 const closeFullPhoto = () => {
-  PAGE.classList.toggle(PAGE_CLASS_NAME);
-  fullPhoto.classList.toggle('hidden');
-
+  toggleModal(fullPhoto);
   deleteEventListeners();
 }
 
 const closeFullPhotoEsc = (evt) => {
   if(isEscEvent(evt) && !fullPhoto.classList.contains('hidden')) {
-    PAGE.classList.toggle(PAGE_CLASS_NAME);
-    fullPhoto.classList.toggle('hidden');
-
+    toggleModal(fullPhoto);
     deleteEventListeners();
   }
 }

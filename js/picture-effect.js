@@ -54,15 +54,6 @@ const addRadioboxHandler = (radiobox) => {
           },
         },
       });
-    } else {
-      slider.noUiSlider.updateOptions({
-        range: {
-          'min': 0,
-          'max': 1,
-        },
-        start: 0,
-        step: 0.1,
-      });
     }
   });
 }
