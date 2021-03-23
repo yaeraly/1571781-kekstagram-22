@@ -1,7 +1,7 @@
 import { showAlert } from './util.js';
 
 const getData = (onSuccess) => {
-  fetch('https://22.javascript.pages.academy/kekstagram/daa')
+  fetch('https://22.javascript.pages.academy/kekstagram/data')
     .then((response) => {
       if(response.ok) {
         return response.json();
