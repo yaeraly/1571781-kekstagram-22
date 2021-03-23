@@ -72,7 +72,7 @@ const deleteSuccessPopup = () => {
 }
 
 const deleteSuccessPopupOut = (evt) => {
-  if (evt.target == successPopup) {
+  if (evt.target === successPopup) {
     removeSuccessModal();
   }
 }
