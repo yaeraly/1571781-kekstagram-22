@@ -8,9 +8,6 @@ const pictureSubmitForm   = document.querySelector('.img-upload__form');
 const pictureEditForm     = document.querySelector('.img-upload__overlay');
 const previewPicture      = pictureEditForm.querySelector('img');
 const closeEditFormButton = pictureEditForm.querySelector('.img-upload__cancel');
-const hashtag             = pictureEditForm.querySelector('.text__hashtags');
-const comment             = pictureEditForm.querySelector('.text__description');
-const effectRadio         = pictureEditForm.querySelectorAll('.effects__radio');
 const imgPicturePreview   = document.querySelector('.img-upload__preview');
 
 
@@ -20,15 +17,10 @@ const decrementScaleValueButton = pictureEditForm.querySelector('.scale__control
 
 
 const resetUploadForm = () => {
-  hashtag.value = null;
-  comment.value = null;
-  inputUpload.value = null;
-  effectRadio[0].checked = true;
-  imgPicturePreview.style = null;
-  imgPicturePreview.className = null;
+  pictureSubmitForm.reset();
 
-  scaleControlValue.value = '100%';
-  previewPicture.style = 'transform: scale(1)';
+  imgPicturePreview.style = null;     // Не получается сбосить эффекты после отправки на сервер, пришлось так сделать
+  imgPicturePreview.className = null; // Не получается сбосить эффекты после отправки на сервер, пришлось так сделать
 }
 
 const uploadPicture = () => {

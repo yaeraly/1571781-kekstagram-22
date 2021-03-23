@@ -2,13 +2,16 @@ import { sendData } from './fetch-api.js';
 import { resetUploadForm } from './picture-upload.js';
 import { isEscEvent, toggleModal } from './util.js';
 
-const main              = document.querySelector('main');
-const successPopup      = document.querySelector('#success').content.querySelector('.success');
-const failPopup         = document.querySelector('#error').content.querySelector('.error');
-const pictureEditForm   = document.querySelector('.img-upload__overlay');
+const main                  = document.querySelector('main');
+const successPopupTemplate  = document.querySelector('#success').content.querySelector('.success');
+const failPopupTemplate     = document.querySelector('#error').content.querySelector('.error');
+const pictureEditForm       = document.querySelector('.img-upload__overlay');
 
-const successButton     = successPopup.querySelector('.success__button');
-const failButton        = failPopup.querySelector('.error__button');
+
+let successPopup;
+let failPopup;
+let successButton;
+let failButton;
 
 const removeSuccessModal = () => {
   main.removeChild(successPopup);
@@ -32,34 +35,36 @@ const setUserFormSubmit = (evt) => {
       toggleModal(pictureEditForm);
       resetUploadForm();
 
-      const node = successPopup.cloneNode(true);
-      main.appendChild(successPopup);
-
-      addEventListeners('success');
+      const successElement = successPopupTemplate.cloneNode(true);
+      main.appendChild(successElement);
+      successPopup = main.querySelector('.success');
+      successButton = successPopup.querySelector('.success__button');
+      addSuccessEventListeners();
     },
     () => {
       toggleModal(pictureEditForm);
       resetUploadForm();
 
-      failPopup.cloneNode(true);
-      main.appendChild(failPopup);
-
-      addEventListeners('fail');
+      const failElement = failPopupTemplate.cloneNode(true);
+      main.appendChild(failElement);
+      failPopup = main.querySelector('.error');
+      failButton = failPopup.querySelector('.error__button');
+      addFailEventListeners();
     },
     new FormData(evt.target),
   );
 }
 
-const addEventListeners = (modal) => {
-  if (modal === 'success') {
-    successButton.addEventListener('click', deleteSuccessPopup);
-    document.addEventListener('keydown', deleteSuccessPopupEsc);
-    window.addEventListener('click', deleteSuccessPopupOut);
-  } else if (modal === 'fail') {
-    failButton.addEventListener('click', deleteFailPopup);
-    document.addEventListener('keydown', deleteFailPopupEsc);
-    window.addEventListener('click', deleteFailPopupOut);
-  }
+const addSuccessEventListeners = () => {
+  successButton.addEventListener('click', deleteSuccessPopup);
+  document.addEventListener('keydown', deleteSuccessPopupEsc);
+  window.addEventListener('click', deleteSuccessPopupOut);
+}
+
+const addFailEventListeners = () => {
+  failButton.addEventListener('click', deleteFailPopup);
+  document.addEventListener('keydown', deleteFailPopupEsc);
+  window.addEventListener('click', deleteFailPopupOut);
 }
 
 const deleteSuccessPopup = () => {
@@ -67,7 +72,7 @@ const deleteSuccessPopup = () => {
 }
 
 const deleteSuccessPopupOut = (evt) => {
-  if (evt.target === successPopup) {
+  if (evt.target == successPopup) {
     removeSuccessModal();
   }
 }
