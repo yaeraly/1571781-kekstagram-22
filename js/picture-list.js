@@ -1,3 +1,5 @@
+import { showFullPhoto } from './big-picture.js';
+
 const renderPictures = (arr) => {
   const pictureContainer  = document.querySelector('.pictures');
   const pictureTemplate   = document.querySelector('#picture').content.querySelector('.picture');
@@ -16,4 +18,19 @@ const renderPictures = (arr) => {
   pictureContainer.appendChild(fragment);
 }
 
-export { renderPictures }
+const renderPictureList = (pictureArray) => {
+  let pictures  = document.querySelectorAll('.picture');
+
+  pictures.forEach((picture) => {
+    picture.remove();
+  })
+
+
+  renderPictures(pictureArray);
+  pictures  = document.querySelectorAll('.picture');
+  pictureArray.forEach((photo, index) => {
+    showFullPhoto(pictures[index], photo);
+  });
+}
+
+export { renderPictureList }
