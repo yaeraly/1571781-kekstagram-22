@@ -49,7 +49,7 @@ const getRandomArrayElement = (arr, neededElements = 1) => {
 }
 
 const validateStringMaxLength = (string, maxLength = 140) => {
-  return string.length <= maxLength;
+  return string.length > maxLength;
 }
 
 const isEscEvent = (evt) => {

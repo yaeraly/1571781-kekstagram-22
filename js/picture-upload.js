@@ -1,10 +1,14 @@
 import { isEscEvent, toggleModal } from './util.js';
+import { validateComment } from './comment-validation.js';
+import { validateHashtags } from './hashtag-validation.js';
 import { setUserFormSubmit } from './picture-form.js';
 import { incrementScaleValue, decrementScaleValue } from './picture-scale.js';
 
 
 const inputUpload         = document.querySelector('.img-upload__input');
 const pictureSubmitForm   = document.querySelector('.img-upload__form');
+const hashtagInput        = pictureSubmitForm.querySelector('.text__hashtags');
+const commentInput        = pictureSubmitForm.querySelector('.text__description');
 const pictureEditForm     = document.querySelector('.img-upload__overlay');
 const previewPicture      = pictureEditForm.querySelector('img');
 const closeEditFormButton = pictureEditForm.querySelector('.img-upload__cancel');
@@ -15,6 +19,8 @@ const scaleControlValue         = pictureEditForm.querySelector('.scale__control
 const incrementScaleValueButton = pictureEditForm.querySelector('.scale__control--bigger');
 const decrementScaleValueButton = pictureEditForm.querySelector('.scale__control--smaller');
 
+const validateCommentDebounce = validateComment(commentInput);
+const validateHashtagsDebounce = validateHashtags(hashtagInput);
 
 const resetUploadForm = () => {
   pictureSubmitForm.reset();
@@ -38,7 +44,7 @@ const closeEditPictureForm = () => {
   deleteEventListeners();
 }
 
-const closeEditPictureFormEsc = (evt) => {
+const closeEditPictureFormByEscape = (evt) => {
   if (isEscEvent(evt) && !pictureEditForm.classList.contains('hidden')) {
     toggleModal(pictureEditForm);
     resetUploadForm();
@@ -46,21 +52,44 @@ const closeEditPictureFormEsc = (evt) => {
   }
 }
 
+const blockEscape = () => {
+  document.removeEventListener('keydown', closeEditPictureFormByEscape);
+}
+
+const returnBackEscape = () => {
+  document.addEventListener('keydown', closeEditPictureFormByEscape);
+}
+
 const addEventListeners = () => {
-  document.addEventListener('keydown', closeEditPictureFormEsc);
+  hashtagInput.addEventListener('focus', blockEscape);
+  hashtagInput.addEventListener('blur', returnBackEscape);
+  hashtagInput.addEventListener('input', validateHashtagsDebounce);
+
+  commentInput.addEventListener('focus', blockEscape);
+  commentInput.addEventListener('blur', returnBackEscape);
+  commentInput.addEventListener('input', validateCommentDebounce);
+
   pictureSubmitForm.addEventListener('submit', setUserFormSubmit);
+  document.addEventListener('keydown', closeEditPictureFormByEscape);
   closeEditFormButton.addEventListener('click', closeEditPictureForm);
   incrementScaleValueButton.addEventListener('click', incrementScaleValue);
   decrementScaleValueButton.addEventListener('click', decrementScaleValue);
 }
 
 const deleteEventListeners = () => {
-  document.removeEventListener('keydown', closeEditPictureFormEsc);
+  hashtagInput.removeEventListener('focus', blockEscape);
+  hashtagInput.removeEventListener('blur', returnBackEscape);
+  hashtagInput.removeEventListener('input', validateHashtagsDebounce);
+
+  commentInput.removeEventListener('focus', blockEscape);
+  commentInput.removeEventListener('blur', returnBackEscape);
+  commentInput.removeEventListener('input', validateCommentDebounce);
+
   pictureSubmitForm.removeEventListener('submit', setUserFormSubmit);
+  document.removeEventListener('keydown', closeEditPictureFormByEscape);
   closeEditFormButton.removeEventListener('click', closeEditPictureForm);
   incrementScaleValueButton.removeEventListener('click', incrementScaleValue);
   decrementScaleValueButton.removeEventListener('click', decrementScaleValue);
 }
-
 
 export { uploadPicture, resetUploadForm }
