@@ -82,13 +82,24 @@ const toggleModal = (popup, tagName='hidden') => {
   popup.classList.toggle(tagName);
 }
 
+const debounce = (func, timeout) => {
+  let timer;
+  return (...args) => {
+    const callFunc = () => func.apply(this, args);
+    clearTimeout(timer);
+    timer = setTimeout(callFunc, timeout);
+  };
+};
+
 export {
-  getUniqueRandomInteger,
-  getArrayRange,
-  getRandomNumber,
-  getRandomArrayElement,
+  makeUniqueRandomIntegerGenerator,
   validateStringMaxLength,
+  getUniqueRandomInteger,
+  getRandomArrayElement,
+  getRandomNumber,
+  getArrayRange,
+  toggleModal,
   isEscEvent,
   showAlert,
-  toggleModal
+  debounce
 }
