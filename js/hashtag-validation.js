@@ -34,8 +34,10 @@ const isEmptyHashtag = (hashtagInput) => {
 }
 
 const hasSpecialSymbols = (hashtags) => {
-  if (/^[0-9A-Za-z#]+$/.test(hashtags)) {
-    return true;
+  for (let i = 0; i < hashtags.length; i++) {
+    if (!/^[0-9A-Za-z#]+$/.test(hashtags[i])) {
+      return true;
+    }
   }
   return false;
 }
@@ -56,7 +58,7 @@ const validateHashtags = (hashtagInput) => {
       hashtagInput.setCustomValidity('Один и тот же хэш-тег не может быть использован дважды');
     } else if (validateHasgtagLength(hashtags)) {
       hashtagInput.setCustomValidity('Максимальная длина хэш-тега 20 символов, включая решётку');
-    } else if (!hasSpecialSymbols(hashtags)) {
+    } else if (hasSpecialSymbols(hashtags)) {
       hashtagInput.setCustomValidity('Хеш-тег после решётки должен состоять только из букв и чисел');
     } else {
       hashtagInput.setCustomValidity('');
