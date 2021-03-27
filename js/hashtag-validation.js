@@ -48,7 +48,7 @@ const hasSpecialSymbols = (hashtags) => {
 const validateHashtags = (hashtagInput) => {
 
   const validateHashtag = () => {
-    const hashtags = hashtagInput.value.toLowerCase().split(' ').filter((item) => {
+    const hashtags = hashtagInput.value.toLowerCase().split(' ').filter((item) => !!item
       return item !== ''
     });
 
@@ -92,5 +92,4 @@ export { validateHashtags }
 // один и тот же хэш-тег не может быть использован дважды;
 
 // нельзя указать больше пяти хэш-тегов;
-
 
