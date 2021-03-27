@@ -16,7 +16,7 @@ const validateHasgtagLength = (hashtags) => {
   return false;
 }
 
-const isHashtagStartsWithHash = (hashtags) => {
+const HashtagStartsWithHash = (hashtags) => {
   for (let i = 0; i < hashtags.length; i++) {
     if (hashtags[i].charAt(0) === '#') {
       return true;
@@ -48,7 +48,7 @@ const validateHashtags = (hashtagInput) => {
 
     if (validateHashtagQuantity(hashtags)) {
       hashtagInput.setCustomValidity('Нельзя указать больше пяти хэш-тегов');
-    } else if (!isHashtagStartsWithHash(hashtags)) {
+    } else if (!HashtagStartsWithHash(hashtags)) {
       hashtagInput.setCustomValidity('Хэш-тег должен начинаться с символа # (решётка)');
     } else if (isEmptyHashtag(hashtagInput)) {
       hashtagInput.setCustomValidity('Хеш-тег не может состоять только из одной решётки');
