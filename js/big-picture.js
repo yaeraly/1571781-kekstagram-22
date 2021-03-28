@@ -41,7 +41,7 @@ const showFullPhoto = ( pictureElement, { url, description, likes, comments } ) 
 
       const loadMoreComments = () => {
         commentStart += 5;
-        if(commentEnd + 5 <= commentsLength) {
+        if(commentEnd + 5 < commentsLength) {
           commentEnd += 5;
         } else {
           commentEnd = commentsLength;
